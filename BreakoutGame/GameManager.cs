@@ -18,7 +18,7 @@ namespace BreakoutGame
         public void GameLoop()
         {
             Start();
-            while (!br.GameOver)
+            //while (!br.GameOver)
             {
                 m.Update();
             }

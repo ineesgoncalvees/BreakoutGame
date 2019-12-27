@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,16 +7,17 @@ namespace BreakoutGame
 {
     public class Menu
     {
-        // console dimensions
-        private int x = 100, y = 60;
-
         private string title = "Breakout";
 
         private string names = "Diana Nóia & Inês Gonçalves";
 
         private string controls = "Play with the arrow keys";
 
-        private readonly int height = 20, width = 60;
+        private List<Brick> bricks;
+        private Vector2 brickPos;
+        private string brickPrint = "   ";
+
+
         private GameManager gm;
 
         public Menu(GameManager gm)
@@ -84,18 +86,20 @@ namespace BreakoutGame
 
         private void ShowGame()
         {
-            for(int i =0; i < height; i++)
+            bricks = new List<Brick>();
+
+            brickPos = new Vector2();
+            brickPos.X = (((Console.LargestWindowWidth - (24 * brickPrint.Length)) / 2));
+            brickPos.Y = 5;
+
+            for(int row = 0; row < 3; row++)
             {
-                for(int j=0; j<width; j++)
+                for(int col1 = 0; col1 < 24; col1++)
                 {
-                    if (i == 0 || i == height - 1)
-                    {
-                        Console.Write("-");
-                    }
-                    else if (j == 0 || j == width - 1)
-                    {
-                        Console.Write("|");
-                    }
+                    Brick newBrick = new Brick(brickPrint, brickPos, 10, ConsoleColor.Red);
+                    bricks.Add(newBrick);
+
+                    brickPos.X += brickPrint.Length;
                 }
             }
         }
