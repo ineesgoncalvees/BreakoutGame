@@ -6,8 +6,8 @@ namespace BreakoutGame
     {
         static void Main(string[] args)
         {
-            Menu menu = new Menu();
-            menu.Options();
+            GameManager gm = new GameManager();
+            gm.GameLoop();
         }
     }
 }
