@@ -14,9 +14,7 @@ namespace BreakoutGame
         private string controls = "Play with the arrow keys";
 
         private List<Brick> bricks;
-        private Vector2 brickPos;
-        private string brickPrint = "   ";
-
+        private string brickPrint = "\u2580\u2580 ";
 
         private GameManager gm;
 
@@ -88,20 +86,59 @@ namespace BreakoutGame
         {
             bricks = new List<Brick>();
 
-            brickPos = new Vector2();
-            brickPos.X = (((Console.LargestWindowWidth - (24 * brickPrint.Length)) / 2));
-            brickPos.Y = 5;
-
-            for(int row = 0; row < 3; row++)
+            for(int row = 0; row < 2; row++)
             {
-                for(int col1 = 0; col1 < 24; col1++)
+                for(int col1 = 0; col1 < 20; col1++)
                 {
-                    Brick newBrick = new Brick(brickPrint, brickPos, 10, ConsoleColor.Red);
+                    Brick newBrick = new Brick(brickPrint, 10);
                     bricks.Add(newBrick);
-
-                    brickPos.X += brickPrint.Length;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write(brickPrint);
                 }
+
+                Console.WriteLine();
+
+                for (int col2 = 0; col2 < 20; col2++)
+                {
+                    Brick newBrick = new Brick(brickPrint, 10);
+                    bricks.Add(newBrick);
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.Write(brickPrint);
+                }
+
+                Console.WriteLine();
+
+                for (int col3 = 0; col3 < 20; col3++)
+                {
+                    Brick newBrick = new Brick(brickPrint, 10);
+                    bricks.Add(newBrick);
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write($"{brickPrint}");
+                }
+
+                Console.WriteLine();
+
+                for (int col3 = 0; col3 < 20; col3++)
+                {
+                    Brick newBrick = new Brick(brickPrint, 10);
+                    bricks.Add(newBrick);
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"{brickPrint}");
+                }
+
+                Console.WriteLine();
+
+                for (int col3 = 0; col3 < 20; col3++)
+                {
+                    Brick newBrick = new Brick(brickPrint, 10);
+                    bricks.Add(newBrick);
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write($"{brickPrint}");
+                }
+
+                Console.WriteLine();
             }
+
         }
     }
 }

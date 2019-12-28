@@ -7,21 +7,17 @@ namespace BreakoutGame
 {
     class Brick
     {
-        private string brickPrint = "   ";
-        private Vector2 brickPos;
-        private ConsoleColor color;
+        private string brickPrint = "\u2580\u2580 ";
 
         private bool isVisible;
         private bool isHit;
 
         private int points;
 
-        public Brick(string brickPrint, Vector2 brickPos, int points, ConsoleColor color)
+        public Brick(string brickPrint, int points)
         {
             this.brickPrint = brickPrint;
-            this.brickPos = brickPos;
             this.points = points;
-            this.color = color;
             this.isVisible = true;
             this.isHit = false;
         }

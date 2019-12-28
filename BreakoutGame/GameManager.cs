@@ -11,6 +11,7 @@ namespace BreakoutGame
 
         public void Start() 
         {
+            Console.SetWindowSize(60, 40);
             m = new Menu(this);
             br = new Breakout();
         }
