@@ -20,7 +20,7 @@ namespace BreakoutGame
         private Paddle paddle;
         private GameManager gm;
 
-        Vector2 paddlePos;
+        int paddlePos;
 
         public Menu(GameManager gm)
         {
@@ -31,7 +31,7 @@ namespace BreakoutGame
         public void Update()
         {
             ShowGame();
-            paddle.MovePaddle();
+            //paddle.MovePaddle();
         }
 
         public void Options()
@@ -142,11 +142,13 @@ namespace BreakoutGame
             // paddlePos.Y = ;
 
             Console.SetCursorPosition(28, 30);
-            paddle = new Paddle(paddlePrint,paddlePos);
+            paddlePos = Console.CursorLeft;
+            paddle = new Paddle(paddlePrint, paddlePos);
 
             paddle.PaddlePrint = paddlePrint;
             Console.ForegroundColor = ConsoleColor.White;
             paddle.PrintInfo();
+            paddle.MovePaddle();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace BreakoutGame
             PaddlePrint = paddlePrint;
             this.paddlePos = paddlePos;
         }
+
         public void PrintInfo()
         {
             Console.WriteLine(PaddlePrint);
@@ -24,17 +25,29 @@ namespace BreakoutGame
         public void MovePaddle()
         {
             ConsoleKeyInfo keyInfo;
+            paddlePos = Console.CursorLeft;
 
             while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
             {
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.RightArrow:
-                        paddlePos += 7;
+                        int l = Console.CursorLeft + 7;
+                        if (paddlePos < 50)
+                        {
+                            Console.SetCursorPosition(l, 30);
+                            paddlePos = Console.CursorLeft;
+                        }
+
                         break;
 
                     case ConsoleKey.LeftArrow:
-                        paddlePos-= 7;
+                        int r = Console.CursorLeft - 7;
+                        if (paddlePos > 0)
+                        {
+                            Console.SetCursorPosition(r, 30);
+                            paddlePos = Console.CursorLeft;
+                        }
                         break;
                 }
             }
