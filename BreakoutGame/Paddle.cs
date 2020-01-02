@@ -7,17 +7,37 @@ namespace BreakoutGame
 {
     class Paddle
     {
-        public Vector2 PaddlePos { get; set; }
         public string PaddlePrint { get; set; }
 
-        public Paddle(string paddlePrint, Vector2 paddlePos)
+        public int paddlePos;
+
+        public Paddle(string paddlePrint, int paddlePos)
         {
             PaddlePrint = paddlePrint;
-            PaddlePos = paddlePos;
+            this.paddlePos = paddlePos;
         }
         public void PrintInfo()
         {
             Console.WriteLine(PaddlePrint);
+        }
+
+        public void MovePaddle()
+        {
+            ConsoleKeyInfo keyInfo;
+
+            while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
+            {
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.RightArrow:
+                        paddlePos += 7;
+                        break;
+
+                    case ConsoleKey.LeftArrow:
+                        paddlePos-= 7;
+                        break;
+                }
+            }
         }
     }
 }
