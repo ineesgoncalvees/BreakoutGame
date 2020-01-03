@@ -12,21 +12,26 @@ namespace BreakoutGame
         public void Start() 
         {
             // Sets the window size
-            Console.SetWindowSize(60, 40);
+            Console.SetWindowSize(63, 40);
             // Sets the buffer size of the console
-            Console.SetBufferSize(60, 40);
+            Console.SetBufferSize(63, 40);
+            Console.CursorVisible = false;
 
             m = new Menu(this);
             br = new Breakout();
+            br.GameOver = false;
         }
 
         public void GameLoop()
         {
             Start();
-            //while (!br.GameOver)
+            while (!br.GameOver)
             {
                 m.Update();
             }
+
+            Console.Clear();
+            m.Options();
         }
     }
 }

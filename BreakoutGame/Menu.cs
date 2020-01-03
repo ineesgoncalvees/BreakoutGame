@@ -15,12 +15,14 @@ namespace BreakoutGame
 
         private List<Brick> bricks;
         private string brickPrint = "\u2580\u2580 ";
-        private string paddlePrint = "\u2580\u2580\u2580\u2580\u2580\u2580\u2580";
+        private string paddlePrint = "       \u2580\u2580\u2580\u2580\u2580\u2580\u2580       ";
 
         private Paddle paddle;
         private GameManager gm;
+        private Breakout br;
 
         int paddlePos;
+        ConsoleKey keyInfo;
 
         public Menu(GameManager gm)
         {
@@ -31,7 +33,11 @@ namespace BreakoutGame
         public void Update()
         {
             ShowGame();
-            //paddle.MovePaddle();
+            if(keyInfo == ConsoleKey.Escape)
+            {
+                br.GameOver = true;
+                
+            }
         }
 
         public void Options()
@@ -94,7 +100,7 @@ namespace BreakoutGame
             Console.Write(" ");
             for (int row = 0; row < 2; row++)
             {
-                for (int col1 = 0; col1 < 20; col1++)
+                for (int col1 = 0; col1 < 21; col1++)
                 {
                     Brick newBrick = new Brick(brickPrint, 10);
                     bricks.Add(newBrick);
@@ -102,7 +108,7 @@ namespace BreakoutGame
                     Console.Write(brickPrint);
                 }
 
-                for (int col2 = 0; col2 < 20; col2++)
+                for (int col2 = 0; col2 < 21; col2++)
                 {
                     Brick newBrick = new Brick(brickPrint, 10);
                     bricks.Add(newBrick);
@@ -110,7 +116,7 @@ namespace BreakoutGame
                     Console.Write(brickPrint);
                 }
 
-                for (int col3 = 0; col3 < 20; col3++)
+                for (int col3 = 0; col3 < 21; col3++)
                 {
                     Brick newBrick = new Brick(brickPrint, 10);
                     bricks.Add(newBrick);
@@ -118,7 +124,7 @@ namespace BreakoutGame
                     Console.Write(brickPrint);
                 }
 
-                for (int col4 = 0; col4 < 20; col4++)
+                for (int col4 = 0; col4 < 21; col4++)
                 {
                     Brick newBrick = new Brick(brickPrint, 10);
                     bricks.Add(newBrick);
@@ -126,7 +132,7 @@ namespace BreakoutGame
                     Console.Write(brickPrint);
                 }
 
-                for (int col5 = 0; col5 < 20; col5++)
+                for (int col5 = 0; col5 < 21; col5++)
                 {
                     Brick newBrick = new Brick(brickPrint, 10);
                     bricks.Add(newBrick);
@@ -136,17 +142,14 @@ namespace BreakoutGame
 
             }
 
-
-            // paddlePos = new Vector2();
-            // paddlePos.X = ;
-            // paddlePos.Y = ;
-
             Console.SetCursorPosition(28, 30);
             paddlePos = Console.CursorLeft;
+
             paddle = new Paddle(paddlePrint, paddlePos);
 
             paddle.PaddlePrint = paddlePrint;
             Console.ForegroundColor = ConsoleColor.White;
+
             paddle.PrintInfo();
             paddle.MovePaddle();
         }

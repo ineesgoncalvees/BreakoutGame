@@ -25,6 +25,7 @@ namespace BreakoutGame
         public void MovePaddle()
         {
             ConsoleKeyInfo keyInfo;
+            Console.SetCursorPosition(28, 30);
             paddlePos = Console.CursorLeft;
 
             while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
@@ -32,21 +33,25 @@ namespace BreakoutGame
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.RightArrow:
-                        int l = Console.CursorLeft + 7;
-                        if (paddlePos < 50)
+                        int l = paddlePos + 7;
+                        if (paddlePos < 43)
                         {
                             Console.SetCursorPosition(l, 30);
                             paddlePos = Console.CursorLeft;
+                            PrintInfo();
+
                         }
 
                         break;
 
                     case ConsoleKey.LeftArrow:
-                        int r = Console.CursorLeft - 7;
+                        int r = paddlePos - 7;
                         if (paddlePos > 0)
                         {
                             Console.SetCursorPosition(r, 30);
                             paddlePos = Console.CursorLeft;
+                            PrintInfo();
+
                         }
                         break;
                 }

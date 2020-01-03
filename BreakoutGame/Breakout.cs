@@ -7,5 +7,7 @@ namespace BreakoutGame
     class Breakout
     {
         public bool GameOver { get; set; }
+
+
     }
 }
