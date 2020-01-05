@@ -12,6 +12,9 @@ namespace BreakoutGame
         public int BallPosX { get; set; }
         public int BallPosY { get; set; }
 
+        ConsoleKey keyInfo;
+
+
         public Ball(string ballPrint, int ballPosX, int ballPosY)
         {
             BallPrint = ballPrint;
@@ -31,12 +34,17 @@ namespace BreakoutGame
 
         public void MoveBall()
         {
-            if (Console.CursorTop != Console.BufferWidth &&
-                Console.CursorLeft != Console.BufferHeight)
+            if (keyInfo != ConsoleKey.Escape)
             {
-                Console.SetCursorPosition(BallPosX, BallPosY);
-                Console.SetCursorPosition(BallPosX++, BallPosY++);
-                PrintBall();
+                if (Console.CursorTop != Console.BufferWidth &&
+                Console.CursorLeft != Console.BufferHeight)
+                {
+                    Console.SetCursorPosition(BallPosX, BallPosY);
+                    Console.SetCursorPosition(BallPosX++, BallPosY++);
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    PrintBall();
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
             }
         }
     }
