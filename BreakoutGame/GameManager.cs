@@ -31,7 +31,7 @@ namespace BreakoutGame
             }
 
             Console.Clear();
-            m.Options();
+            GameLoop();
         }
     }
 }

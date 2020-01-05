@@ -7,7 +7,7 @@ namespace BreakoutGame
 {
     class Brick
     {
-        private string brickPrint = "\u2580\u2580 ";
+        private string BrickPrint { get; set; }
 
         private bool isVisible;
         private bool isHit;
@@ -16,7 +16,7 @@ namespace BreakoutGame
 
         public Brick(string brickPrint, int points)
         {
-            this.brickPrint = brickPrint;
+            BrickPrint = brickPrint;
             this.points = points;
             this.isVisible = true;
             this.isHit = false;

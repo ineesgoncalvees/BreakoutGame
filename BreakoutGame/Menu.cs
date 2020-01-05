@@ -15,13 +15,20 @@ namespace BreakoutGame
 
         private List<Brick> bricks;
         private string brickPrint = "\u2580\u2580 ";
-        private string paddlePrint = "       \u2580\u2580\u2580\u2580\u2580\u2580\u2580       ";
+
+        private Ball ball;
+        private string ballPrint = "\u2580";
+        private int ballPosX;
+        private int ballPosY;
 
         private Paddle paddle;
+        private string paddlePrint =
+            "       \u2580\u2580\u2580\u2580\u2580\u2580\u2580       ";
+        private int paddlePos;
+
         private GameManager gm;
         private Breakout br;
 
-        int paddlePos;
         ConsoleKey keyInfo;
 
         public Menu(GameManager gm)
@@ -32,12 +39,14 @@ namespace BreakoutGame
 
         public void Update()
         {
-            ShowGame();
-            if(keyInfo == ConsoleKey.Escape)
+            if(keyInfo != ConsoleKey.Escape)
             {
-                br.GameOver = true;
-                
+                ball.MoveBall();
+                // Call method MovePaddle()
+                paddle.MovePaddle();
             }
+            else
+                br.GameOver = true;
         }
 
         public void Options()
@@ -48,7 +57,10 @@ namespace BreakoutGame
                 {
                     case "1":
                         Console.Clear();
+                        ShowGame();
                         return;
+                        //ShowGame();
+                        //break;
                     case "2":
                         Console.Clear();
                         Controls();
@@ -93,7 +105,7 @@ namespace BreakoutGame
             Environment.Exit(0);
         }
 
-        private void ShowGame()
+        public void ShowGame()
         {
             bricks = new List<Brick>();
             Console.WriteLine();
@@ -142,16 +154,30 @@ namespace BreakoutGame
 
             }
 
-            Console.SetCursorPosition(28, 30);
+            // Set start position for the ball
+            Console.SetCursorPosition(31, 12);
+            ballPosX = Console.CursorLeft;
+            ballPosY = Console.CursorTop;
+
+            // Creats a new ball
+            ball = new Ball(ballPrint, ballPosX, ballPosY);
+
+            // Prints ball in cyan color
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            ball.PrintBall();
+
+            // Set inicial cursor position
+            Console.SetCursorPosition(21, 30);
+            // Sets the position of the paddle as equal to the cursor
             paddlePos = Console.CursorLeft;
 
+            // Creats the paddle
             paddle = new Paddle(paddlePrint, paddlePos);
-
+            
+            // Prints the paddle in white
             paddle.PaddlePrint = paddlePrint;
             Console.ForegroundColor = ConsoleColor.White;
-
-            paddle.PrintInfo();
-            paddle.MovePaddle();
+            paddle.PrintPaddle();
         }
     }
 }

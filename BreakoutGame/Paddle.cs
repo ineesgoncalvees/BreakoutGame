@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Numerics;
 
 namespace BreakoutGame
 {
@@ -11,15 +10,22 @@ namespace BreakoutGame
 
         public int paddlePos;
 
+        private bool isPrinted;
+
         public Paddle(string paddlePrint, int paddlePos)
         {
             PaddlePrint = paddlePrint;
             this.paddlePos = paddlePos;
         }
 
-        public void PrintInfo()
+        public void PrintPaddle()
         {
             Console.WriteLine(PaddlePrint);
+        }
+
+        public void ErasePaddle()
+        {
+            Console.Write("       ");
         }
 
         public void MovePaddle()
@@ -33,13 +39,13 @@ namespace BreakoutGame
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.RightArrow:
+                        ErasePaddle();
                         int l = paddlePos + 7;
                         if (paddlePos < 43)
                         {
                             Console.SetCursorPosition(l, 30);
                             paddlePos = Console.CursorLeft;
-                            PrintInfo();
-
+                            PrintPaddle();
                         }
 
                         break;
@@ -50,8 +56,7 @@ namespace BreakoutGame
                         {
                             Console.SetCursorPosition(r, 30);
                             paddlePos = Console.CursorLeft;
-                            PrintInfo();
-
+                            PrintPaddle();
                         }
                         break;
                 }
