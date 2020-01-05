@@ -18,47 +18,49 @@ namespace BreakoutGame
             this.paddlePos = paddlePos;
         }
 
+        public void Update()
+        {
+            MovePaddle();
+        }
+
         public void PrintPaddle()
         {
             Console.WriteLine(PaddlePrint);
         }
 
-        public void ErasePaddle()
-        {
-            Console.Write("       ");
-        }
-
         public void MovePaddle()
         {
             ConsoleKeyInfo keyInfo;
-            Console.SetCursorPosition(28, 30);
+            Console.SetCursorPosition(paddlePos, 30);
             paddlePos = Console.CursorLeft;
 
-            while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
+            while (Console.KeyAvailable)
             {
-                switch (keyInfo.Key)
+                if ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
                 {
-                    case ConsoleKey.RightArrow:
-                        ErasePaddle();
-                        int l = paddlePos + 7;
-                        if (paddlePos < 43)
-                        {
-                            Console.SetCursorPosition(l, 30);
-                            paddlePos = Console.CursorLeft;
-                            PrintPaddle();
-                        }
+                    switch (keyInfo.Key)
+                    {
+                        case ConsoleKey.RightArrow:
+                            int l = paddlePos + 1;
+                            if (paddlePos < 54)
+                            {
+                                Console.SetCursorPosition(l, 30);
+                                paddlePos = Console.CursorLeft;
+                                PrintPaddle();
+                            }
 
-                        break;
+                            break;
 
-                    case ConsoleKey.LeftArrow:
-                        int r = paddlePos - 7;
-                        if (paddlePos > 0)
-                        {
-                            Console.SetCursorPosition(r, 30);
-                            paddlePos = Console.CursorLeft;
-                            PrintPaddle();
-                        }
-                        break;
+                        case ConsoleKey.LeftArrow:
+                            int r = paddlePos - 1;
+                            if (paddlePos > 0)
+                            {
+                                Console.SetCursorPosition(r, 30);
+                                paddlePos = Console.CursorLeft;
+                                PrintPaddle();
+                            }
+                            break;
+                    }
                 }
             }
         }

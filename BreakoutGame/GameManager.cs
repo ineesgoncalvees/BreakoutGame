@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Text;
 
 namespace BreakoutGame
 {
     public class GameManager
     {
-        public Menu m;
+        private Menu m;
         private Breakout br;
+        private Paddle paddle;
 
         public void Start() 
         {
@@ -17,8 +19,8 @@ namespace BreakoutGame
             Console.SetBufferSize(63, 40);
             Console.CursorVisible = false;
 
-            m = new Menu(this);
             br = new Breakout();
+            m = new Menu(this, br);
             br.GameOver = false;
         }
 
@@ -28,6 +30,8 @@ namespace BreakoutGame
             while (!br.GameOver)
             {
                 m.Update();
+                //paddle.Update();
+                Thread.Sleep(100);
             }
 
             Console.Clear();

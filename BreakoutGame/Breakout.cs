@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BreakoutGame
 {
-    class Breakout
+    public class Breakout
     {
         public bool GameOver { get; set; }
 

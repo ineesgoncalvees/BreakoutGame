@@ -23,30 +23,32 @@ namespace BreakoutGame
 
         private Paddle paddle;
         private string paddlePrint =
-            "       \u2580\u2580\u2580\u2580\u2580\u2580\u2580       ";
+            " \u2580\u2580\u2580\u2580\u2580\u2580\u2580 ";
         private int paddlePos;
 
         private GameManager gm;
-        private Breakout br;
+        public Breakout br;
 
-        ConsoleKey keyInfo;
+        ConsoleKeyInfo keyInfo;
 
-        public Menu(GameManager gm)
+        public Menu(GameManager gm, Breakout br)
         {
             this.gm = gm;
+            this.br = br;
             MainMenu();
         }
 
         public void Update()
         {
-            if(keyInfo != ConsoleKey.Escape)
+            //if((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
             {
+                // Call method MoveBall()
                 ball.MoveBall();
                 // Call method MovePaddle()
                 paddle.MovePaddle();
             }
-            else
-                br.GameOver = true;
+            //else
+            //    br.GameOver = true;
         }
 
         public void Options()
@@ -167,7 +169,7 @@ namespace BreakoutGame
             ball.PrintBall();
 
             // Set inicial cursor position
-            Console.SetCursorPosition(21, 30);
+            Console.SetCursorPosition(28, 30);
             // Sets the position of the paddle as equal to the cursor
             paddlePos = Console.CursorLeft;
 
