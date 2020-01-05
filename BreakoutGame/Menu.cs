@@ -29,8 +29,6 @@ namespace BreakoutGame
         private GameManager gm;
         public Breakout br;
 
-        ConsoleKeyInfo keyInfo;
-
         public Menu(GameManager gm, Breakout br)
         {
             this.gm = gm;
@@ -41,7 +39,9 @@ namespace BreakoutGame
         public void Update()
         {
             //if((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
+            //if(!br.GameOver)
             {
+                //Console.Write(br.GameOver);
                 // Call method MoveBall()
                 ball.MoveBall();
                 // Call method MovePaddle()
@@ -157,12 +157,12 @@ namespace BreakoutGame
             }
 
             // Set start position for the ball
-            Console.SetCursorPosition(31, 12);
+            Console.SetCursorPosition(50, 12);
             ballPosX = Console.CursorLeft;
             ballPosY = Console.CursorTop;
 
             // Creats a new ball
-            ball = new Ball(ballPrint, ballPosX, ballPosY);
+            ball = new Ball(ballPrint, ballPosX, ballPosY, this);
 
             // Prints ball in cyan color
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -180,6 +180,16 @@ namespace BreakoutGame
             paddle.PaddlePrint = paddlePrint;
             Console.ForegroundColor = ConsoleColor.White;
             paddle.PrintPaddle();
+        }
+
+        public void LoseGame()
+        {
+            Console.Clear();
+            Console.WriteLine("You lost");
+            Console.WriteLine("Press any key to go back to the main menu");
+            Console.ReadKey();
+            Console.Clear();
+            br.GameOver = true;
         }
     }
 }

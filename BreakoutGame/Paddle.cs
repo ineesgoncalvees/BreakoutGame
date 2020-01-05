@@ -10,17 +10,10 @@ namespace BreakoutGame
 
         public int paddlePos;
 
-        private bool isPrinted;
-
         public Paddle(string paddlePrint, int paddlePos)
         {
             PaddlePrint = paddlePrint;
             this.paddlePos = paddlePos;
-        }
-
-        public void Update()
-        {
-            MovePaddle();
         }
 
         public void PrintPaddle()

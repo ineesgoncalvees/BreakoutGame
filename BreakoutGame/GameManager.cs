@@ -30,8 +30,7 @@ namespace BreakoutGame
             while (!br.GameOver)
             {
                 m.Update();
-                //paddle.Update();
-                Thread.Sleep(100);
+                Thread.Sleep(120);
             }
 
             Console.Clear();

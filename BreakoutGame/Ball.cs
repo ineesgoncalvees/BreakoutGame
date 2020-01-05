@@ -9,14 +9,17 @@ namespace BreakoutGame
     {
         private string BallPrint { get; set; }
 
-        public int BallPosX { get; set; }
-        public int BallPosY { get; set; }
+        private int BallPosX { get; set; }
+        private int BallPosY { get; set; }
 
-        public Ball(string ballPrint, int ballPosX, int ballPosY)
+        private Menu m;
+
+        public Ball(string ballPrint, int ballPosX, int ballPosY, Menu m)
         {
             BallPrint = ballPrint;
             BallPosX = ballPosX;
             BallPosY = ballPosY;
+            this.m = m;
         }
 
         public void PrintBall()
@@ -26,6 +29,7 @@ namespace BreakoutGame
 
         public void EraseBall()
         {
+            Console.SetCursorPosition(BallPosX, BallPosY);
             Console.Write(" ");
         }
 
@@ -33,12 +37,27 @@ namespace BreakoutGame
         {
             if(BallPosX < Console.BufferWidth - 1 && BallPosY < Console.BufferHeight - 1)
             {
+                EraseBall();
                 BallPosX++; 
                 BallPosY++;
                 Console.SetCursorPosition(BallPosX, BallPosY);
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 PrintBall();
                 Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if(BallPosX == Console.BufferWidth - 1)
+            {
+                EraseBall();
+                BallPosX--;
+                BallPosY++;
+                Console.SetCursorPosition(BallPosX, BallPosY);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                PrintBall();
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if (BallPosY >= 33)
+            {
+                m.LoseGame();
             }
         }
     }
