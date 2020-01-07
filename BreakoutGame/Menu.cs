@@ -157,7 +157,7 @@ namespace BreakoutGame
             }
 
             // Set start position for the ball
-            Console.SetCursorPosition(50, 12);
+            Console.SetCursorPosition(31, 12);
             ballPosX = Console.CursorLeft;
             ballPosY = Console.CursorTop;
 

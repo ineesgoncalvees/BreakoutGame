@@ -9,7 +9,6 @@ namespace BreakoutGame
     {
         private Menu m;
         private Breakout br;
-        private Paddle paddle;
 
         public void Start() 
         {
@@ -21,6 +20,7 @@ namespace BreakoutGame
 
             br = new Breakout();
             m = new Menu(this, br);
+
             br.GameOver = false;
         }
 
