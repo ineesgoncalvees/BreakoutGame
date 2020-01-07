@@ -1,6 +1,4 @@
-# BreakoutGame
-
-## Projeto 2 - Linguagens de Programação 2
+# BreakoutGame - Linguagens de Programação 2
 
 Projeto realizado por:
 
@@ -46,8 +44,8 @@ O projeto pode ser encontrado neste
       * Adicionar colisões da bola com as paredes;
       * Adicionar colisões da bola com a paddle;
       * Adicionar colisões da bola com os bricks;
-      * Criar sistema de pontos, aos quais adiciona pontos após a colisão com os
-  bricks
+      * Criar sistema de pontos, onde se adicionam os pontos após a colisão com
+  os  bricks
     * Classe Breakout
     * Classe GameManager
 
@@ -61,25 +59,38 @@ A nossa escolha foi implementar o Breakout.
 
 ## Arquitetura da solução
 
-iterator pq usamos foreach 
+O jogo foi organizado da seguinte forma: foi criada uma classe `Menu`, na qual
+o jogo é desenhado. Esta classe chama as classes `Brick`, onde são passados os
+valores para criar os *bricks*; A classe `Paddle`, onde são passados os valores
+da *paddle* e onde a mesma é criada; E a classe `Ball`, na qual são passados os
+valores da bola. e esta também é aqui instânciada. Foram criadas também uma
+classe `Breakout`, na qual instanciamos o *Game Over* e uma classe `GameManager`
+Onde temos o `GameLoop` e as medidas da janela.
 
+Foi utilizado o `GameLoop` *patern*. Este corre com o uso de *threads* e
+enquanto o jogador não perder. Todos as variáveis são iniciadas no `Start()` que
+é chamado no principio do `GameLoop`. O programa em si é chamado no método
+`Update()`.
 
-descrição da solução, com breve explicação de como o programa foi organizado,
-indicação dos design patterns utilizados e a razão do seu uso, bem como dos
-algoritmos implementados (e.g., para deteção de colisões, cálculo de ângulos e
-trajetórias, etc).
+Utilizámos o principio da Single Responsability Principle, onde uma classe deve
+ter apenas uma responsabilidade.
 
-Um diagrama UML de classes simples (i.e., sem indicação dos membros da classe)
-descrevendo a estrutura de classes.
+O seguinte fluxograma demonstra como o programa funciona de forma simplicada.
 
-Um fluxograma mostrando o funcionamento do programa.
+![FLUXOGRAMA](fluxograma.svg)
 
-![FLUXOGRAMA](fluxograma.svg);
-
-UML de classes simples que descreve a estrutura das classes.
+O seguinte UML de classes simples que descreve a estrutura das classes.
 
 ![UML](uml.svg);
 
+Nota: Quando a bola colide com os *bricks* e apaga múltiplos é porque houve uma
+colisão com eles todos, mesmo que tenha colidido só com um canto.
+
 ## Referências
 
-* Whitaker, R. B. (2016). The C# Player's Guide (3rd Edition). Starbound Software.
+Agradecemos aos nossos colegas Flávio Santos e Leandro Brás que nos auxiliaram
+com a lógica do programa.
+
+* Whitaker, R. B. (2016). The C# Player's Guide (3rd Edition). Starbound
+  Software
+  
