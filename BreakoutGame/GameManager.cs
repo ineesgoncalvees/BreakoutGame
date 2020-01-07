@@ -5,11 +5,20 @@ using System.Text;
 
 namespace BreakoutGame
 {
+    /// <summary>
+    /// Classe que corre o GameLoop e define o tamanho da consola
+    /// </summary>
     public class GameManager
     {
+        // Instância da classe Menu
         private Menu m;
+        // Instãncia da classe Breakout
         private Breakout br;
 
+        /// <summary>
+        /// Primeiro método que é chamado quando o jogo começa e define o tamanho da 
+        /// consola
+        /// </summary>
         public void Start() 
         {
             // Sets the window size
@@ -24,6 +33,9 @@ namespace BreakoutGame
             br.GameOver = false;
         }
 
+        /// <summary>
+        /// Método que corre todas as frames do jogo
+        /// </summary>
         public void GameLoop()
         {
             Start();
