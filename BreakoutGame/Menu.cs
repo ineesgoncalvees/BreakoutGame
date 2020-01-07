@@ -56,6 +56,8 @@ namespace BreakoutGame
                         Console.Clear();
                         ShowGame();
                         return;
+                        //ShowGame();
+                        //break;
                     case "2":
                         Console.Clear();
                         Controls();
@@ -151,6 +153,7 @@ namespace BreakoutGame
             Console.ForegroundColor = ConsoleColor.White;
             paddle.PrintPaddle();
 
+
             // Set start position for the ball
             Console.SetCursorPosition(31, 12);
             ballPosX = Console.CursorLeft;
@@ -179,7 +182,9 @@ namespace BreakoutGame
         {
             Console.Clear();
             Console.WriteLine("You lost");
+
             Console.WriteLine("You had " + Points + " points in total!");
+
             Console.WriteLine("Press any key to go back to the main menu");
             Console.ReadKey();
             Console.Clear();
