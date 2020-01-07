@@ -11,6 +11,7 @@ namespace BreakoutGame
         public bool isLeft = false;
 
         private int paddlePos;
+        private List<Brick> bricks;
 
         private string BallPrint { get; set; }
 
@@ -19,13 +20,14 @@ namespace BreakoutGame
 
         private Menu m;
 
-        public Ball(string ballPrint, int ballPosX, int ballPosY, Menu m, int paddlePos)
+        public Ball(string ballPrint, int ballPosX, int ballPosY, Menu m, int paddlePos, List<Brick> bricks)
         {
             BallPrint = ballPrint;
             BallPosX = ballPosX;
             BallPosY = ballPosY;
             this.m = m;
             this.paddlePos = paddlePos;
+            this.bricks = bricks;
         }
 
         public void PrintBall()
@@ -41,6 +43,16 @@ namespace BreakoutGame
 
         public void MoveBall()
         {
+            if (BallPosY >= 29 &&
+                BallPosY <= 31 &&
+                BallPosX >= paddlePos + 1 &&
+                BallPosX <= paddlePos + 8)
+            {
+                isDown = false;
+            }
+
+            BrickCollision();
+
             paddlePos = Console.CursorLeft;
             // Quando o jogo começa a bola vai para baixo e para a direita,
             // quando bate na parede a variavel isLeft fica a true
@@ -82,7 +94,8 @@ namespace BreakoutGame
             else if(BallPosX < Console.BufferWidth - 1 &&
                 BallPosY < Console.BufferHeight - 1 &&
                 !isDown &&
-                !isLeft)
+                !isLeft &&
+                BallPosY != 0)
             {
                 EraseBall();
                 BallPosX++;
@@ -98,7 +111,8 @@ namespace BreakoutGame
             else if(BallPosX <= Console.BufferWidth - 1 &&
                 BallPosY <= Console.BufferHeight - 1 &&
                 !isDown &&
-                isLeft)
+                isLeft &&
+                BallPosY != 0)
             {
                 EraseBall();
                 BallPosX--;
@@ -115,12 +129,53 @@ namespace BreakoutGame
             {
                 m.LoseGame();
             }
-
-            if (BallPosY == 29 &&
-                BallPosX >= paddlePos + 1 &&
-                BallPosX <= paddlePos + 8)
+            else if(BallPosY == 0)
             {
-                isDown = false;
+                EraseBall();
+                BallPosX++;
+                BallPosY++;
+                Console.SetCursorPosition(BallPosX, BallPosY);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                PrintBall();
+                Console.ForegroundColor = ConsoleColor.White;
+                isDown = true;
+            }
+        }
+
+        public void BrickCollision()
+        {
+            for(int i = bricks.Count - 1; i >= 0; i--)
+            {
+                if (BallPosY == bricks[i].brickPosY &&
+                    BallPosX >= bricks[i].brickPosX &&
+                    BallPosX <= bricks[i].brickPosX + 1)
+                {
+                    bricks[i].EraseBrick();
+                    bricks.Remove(bricks[i]);
+                    isDown = !isDown;
+
+                    m.ShowPoints();
+                }
+                else if (BallPosY == bricks[i].brickPosY &&
+                    BallPosX == bricks[i].brickPosX - 1)
+                {
+                    bricks[i].EraseBrick();
+                    bricks.Remove(bricks[i]);
+                    isDown = !isDown;
+                    isLeft = false;
+
+                    m.ShowPoints();
+                }
+                else if (BallPosY == bricks[i].brickPosY &&
+                    BallPosX == bricks[i].brickPosX + 2)
+                {
+                    bricks[i].EraseBrick();
+                    bricks.Remove(bricks[i]);
+                    isDown = !isDown;
+                    isLeft = true;
+
+                    m.ShowPoints();
+                }
             }
         }
     }

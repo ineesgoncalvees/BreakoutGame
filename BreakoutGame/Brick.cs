@@ -8,18 +8,20 @@ namespace BreakoutGame
     class Brick
     {
         private string BrickPrint { get; set; }
+        public int brickPosX { get; }
+        public int brickPosY { get; }
 
-        private bool isVisible;
-        private bool isHit;
-
-        private int points;
-
-        public Brick(string brickPrint, int points)
+        public Brick(string brickPrint, int brickPosX, int brickPosY)
         {
             BrickPrint = brickPrint;
-            this.points = points;
-            this.isVisible = true;
-            this.isHit = false;
+            this.brickPosX = brickPosX;
+            this.brickPosY = brickPosY;
+        }
+
+        public void EraseBrick()
+        {
+            Console.SetCursorPosition(brickPosX, brickPosY);
+            Console.Write("  ");
         }
     }
 }
