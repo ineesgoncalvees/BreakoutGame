@@ -10,6 +10,8 @@ namespace BreakoutGame
         public bool isDown = true;
         public bool isLeft = false;
 
+        private int paddlePos;
+
         private string BallPrint { get; set; }
 
         private int BallPosX { get; set; }
@@ -17,12 +19,13 @@ namespace BreakoutGame
 
         private Menu m;
 
-        public Ball(string ballPrint, int ballPosX, int ballPosY, Menu m)
+        public Ball(string ballPrint, int ballPosX, int ballPosY, Menu m, int paddlePos)
         {
             BallPrint = ballPrint;
             BallPosX = ballPosX;
             BallPosY = ballPosY;
             this.m = m;
+            this.paddlePos = paddlePos;
         }
 
         public void PrintBall()
@@ -38,9 +41,13 @@ namespace BreakoutGame
 
         public void MoveBall()
         {
+            paddlePos = Console.CursorLeft;
             // Quando o jogo começa a bola vai para baixo e para a direita,
             // quando bate na parede a variavel isLeft fica a true
-            if(BallPosX < Console.BufferWidth - 1 && BallPosY < Console.BufferHeight - 1 && isDown && !isLeft)
+            if (BallPosX < Console.BufferWidth - 1 &&
+                BallPosY < Console.BufferHeight - 1 &&
+                isDown &&
+                !isLeft)
             {
                 EraseBall();
                 BallPosX++; 
@@ -49,12 +56,17 @@ namespace BreakoutGame
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 PrintBall();
                 Console.ForegroundColor = ConsoleColor.White;
+
                 if(BallPosX == Console.BufferWidth - 1)
                     isLeft = true;
             }
-            // Se isLeft ficar a true e a bola ainda não saiu de jogo
-            // a bola continua a descer mas muda a direçao para a esquerda
-            else if(BallPosX != 0 && BallPosX != 0 && isLeft && BallPosY <= 33 && isDown)
+            // Se isLeft ficar a true e a bola ainda não saiu de jogo a bola
+            // continua a descer mas muda a direçao para a esquerda
+            else if(BallPosX != 0 &&
+                BallPosX != 0 &&
+                isLeft &&
+                isDown &&
+                BallPosY <= 33)
             {
                 EraseBall();
                 BallPosX--;
@@ -63,23 +75,52 @@ namespace BreakoutGame
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 PrintBall();
                 Console.ForegroundColor = ConsoleColor.White;
+
                 if (BallPosX == 0)
                     isLeft = false;
             }
-            // Se isLeft estiver a false a bola anda para a direita
-            else if(isDown && !isLeft && BallPosY <= 33)
+            else if(BallPosX < Console.BufferWidth - 1 &&
+                BallPosY < Console.BufferHeight - 1 &&
+                !isDown &&
+                !isLeft)
             {
                 EraseBall();
                 BallPosX++;
-                BallPosY++;
+                BallPosY--;
                 Console.SetCursorPosition(BallPosX, BallPosY);
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 PrintBall();
                 Console.ForegroundColor = ConsoleColor.White;
+
+                if (BallPosX == Console.BufferWidth - 1)
+                    isLeft = true;
+            }
+            else if(BallPosX <= Console.BufferWidth - 1 &&
+                BallPosY <= Console.BufferHeight - 1 &&
+                !isDown &&
+                isLeft)
+            {
+                EraseBall();
+                BallPosX--;
+                BallPosY--;
+                Console.SetCursorPosition(BallPosX, BallPosY);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                PrintBall();
+                Console.ForegroundColor = ConsoleColor.White;
+
+                if (BallPosX == 0)
+                    isLeft = false;
             }
             else if (BallPosY >= 33)
             {
                 m.LoseGame();
+            }
+
+            if (BallPosY == 29 &&
+                BallPosX >= paddlePos + 1 &&
+                BallPosX <= paddlePos + 8)
+            {
+                isDown = false;
             }
         }
     }

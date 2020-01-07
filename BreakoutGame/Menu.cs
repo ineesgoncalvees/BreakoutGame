@@ -38,17 +38,10 @@ namespace BreakoutGame
 
         public void Update()
         {
-            //if((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
-            //if(!br.GameOver)
-            {
-                //Console.Write(br.GameOver);
-                // Call method MoveBall()
-                ball.MoveBall();
-                // Call method MovePaddle()
-                paddle.MovePaddle();
-            }
-            //else
-            //    br.GameOver = true;
+            // Call method MoveBall()
+            ball.MoveBall();
+            // Call method MovePaddle()
+            paddle.MovePaddle();
         }
 
         public void Options()
@@ -61,8 +54,6 @@ namespace BreakoutGame
                         Console.Clear();
                         ShowGame();
                         return;
-                        //ShowGame();
-                        //break;
                     case "2":
                         Console.Clear();
                         Controls();
@@ -156,18 +147,6 @@ namespace BreakoutGame
 
             }
 
-            // Set start position for the ball
-            Console.SetCursorPosition(31, 12);
-            ballPosX = Console.CursorLeft;
-            ballPosY = Console.CursorTop;
-
-            // Creats a new ball
-            ball = new Ball(ballPrint, ballPosX, ballPosY, this);
-
-            // Prints ball in cyan color
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            ball.PrintBall();
-
             // Set inicial cursor position
             Console.SetCursorPosition(28, 30);
             // Sets the position of the paddle as equal to the cursor
@@ -175,11 +154,36 @@ namespace BreakoutGame
 
             // Creats the paddle
             paddle = new Paddle(paddlePrint, paddlePos);
-            
+
             // Prints the paddle in white
             paddle.PaddlePrint = paddlePrint;
             Console.ForegroundColor = ConsoleColor.White;
             paddle.PrintPaddle();
+
+            // Set start position for the ball
+            Console.SetCursorPosition(31, 12);
+            ballPosX = Console.CursorLeft;
+            ballPosY = Console.CursorTop;
+
+            // Creats a new ball
+            ball = new Ball(ballPrint, ballPosX, ballPosY, this, paddlePos);
+
+            // Prints ball in cyan color
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            ball.PrintBall();
+
+            //// Set inicial cursor position
+            //Console.SetCursorPosition(28, 30);
+            //// Sets the position of the paddle as equal to the cursor
+            //paddlePos = Console.CursorLeft;
+
+            //// Creats the paddle
+            //paddle = new Paddle(paddlePrint, paddlePos);
+
+            //// Prints the paddle in white
+            //paddle.PaddlePrint = paddlePrint;
+            //Console.ForegroundColor = ConsoleColor.White;
+            //paddle.PrintPaddle();
         }
 
         public void LoseGame()
